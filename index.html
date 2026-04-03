@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Michael Madu — .NET Full Stack Developer</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <style>
+    #hero {
+      min-height: 100vh; background: var(--navy);
+      display: flex; align-items: center;
+      position: relative; overflow: hidden;
+      padding: 120px 5% 80px;
+    }
+    .hero-bg-grid {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(201,168,76,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,0.04) 1px,transparent 1px);
+      background-size: 60px 60px; pointer-events: none;
+    }
+    .hero-bg-glow {
+      position: absolute; top: -20%; right: -5%;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle,rgba(201,168,76,0.07) 0%,transparent 65%);
+      border-radius: 50%; pointer-events: none;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 760px; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 9px;
+      background: rgba(201,168,76,0.1); border: 1px solid var(--border);
+      border-radius: 100px; padding: 7px 20px;
+      font-size: 0.75rem; font-weight: 600; color: var(--gold-light);
+      letter-spacing: 1.3px; text-transform: uppercase; margin-bottom: 2rem;
+    }
+    .hero-badge .dot { width:7px;height:7px;background:#4ade80;border-radius:50%;animation:pulse 2s infinite; }
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.2rem,7.5vw,5.8rem);
+      font-weight: 900; line-height: 1.04;
+      color: var(--white); margin-bottom: 1rem;
+    }
+    .hero-name span { color: var(--gold); }
+    .hero-role { font-size: clamp(1rem,2.5vw,1.2rem); font-weight:300; color:rgba(255,255,255,0.55); margin-bottom:1.8rem; }
+    .hero-role strong { color:var(--gold-light); font-weight:600; }
+    .hero-desc { font-size:1.05rem;line-height:1.85;color:rgba(255,255,255,0.5);max-width:560px;margin-bottom:3rem; }
+    .hero-actions { display:flex;gap:1rem;flex-wrap:wrap; }
+    .hero-stack-card { position:absolute;right:5%;top:50%;transform:translateY(-50%);z-index:1;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:var(--radius);padding:1.6rem 1.8rem;backdrop-filter:blur(8px);min-width:200px; }
+    .hero-stack-card .sc-label { font-size:0.68rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem; }
+    .hero-stack-item { display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.06); }
+    .hero-stack-item:last-child { border-bottom:none; }
+    .sc-dot { width:7px;height:7px;border-radius:50%;background:var(--gold);opacity:0.7;flex-shrink:0; }
+    .sc-name { font-size:0.85rem;font-weight:600;color:rgba(255,255,255,0.75); }
+    .sc-sub { font-size:0.72rem;color:rgba(255,255,255,0.3);margin-left:auto;padding-left:8px; }
+    .scroll-hint {
+      position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);
+      display:flex;flex-direction:column;align-items:center;gap:8px;
+      color:rgba(255,255,255,0.25);font-size:0.72rem;letter-spacing:1.5px;text-transform:uppercase;
+      animation:fadeIn 1s 1s ease both;
+    }
+    .scroll-arrow { width:20px;height:20px;border-right:2px solid rgba(201,168,76,0.4);border-bottom:2px solid rgba(201,168,76,0.4);transform:rotate(45deg);animation:bounceDown 1.5s infinite; }
+    @keyframes bounceDown { 0%,100%{transform:rotate(45deg) translateY(0)} 50%{transform:rotate(45deg) translateY(5px)} }
+    #about-strip { background:var(--white);padding:90px 5%; }
+    .about-grid { display:grid;grid-template-columns:1fr 1.2fr;gap:5rem;align-items:center; }
+    .about-img { width:100%;aspect-ratio:4/5;background:var(--navy-light);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden; }
+    .about-img-initials { font-family:'Playfair Display',serif;font-size:6rem;font-weight:900;color:rgba(201,168,76,0.3); }
+    .about-img-label { position:absolute;bottom:1.5rem;left:1.5rem;background:var(--gold);color:var(--navy);font-size:0.75rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:6px 14px;border-radius:4px; }
+    .about-corner { position:absolute;bottom:-16px;right:-16px;width:100px;height:100px;border:3px solid rgba(201,168,76,0.3);border-radius:var(--radius);pointer-events:none; }
+    .about-corner2 { position:absolute;top:-12px;left:-12px;width:60px;height:60px;background:rgba(201,168,76,0.1);border-radius:6px;pointer-events:none; }
+    .about-text p { font-size:1rem;line-height:1.9;color:var(--text-muted);margin-bottom:1.2rem; }
+    .about-text p strong { color:var(--navy); }
+    .about-pills { display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1.8rem; }
+    .about-actions { margin-top:2rem;display:flex;gap:1rem;flex-wrap:wrap; }
+    #skills-strip { background:var(--cream); }
+    .skills-grid { display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1.4rem; }
+    .skill-card { padding:2rem; }
+    .skill-icon { width:46px;height:46px;background:var(--navy);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:1.2rem; }
+    .skill-card h3 { font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--navy);margin-bottom:1rem; }
+    .tag-group { display:flex;flex-wrap:wrap;gap:0.5rem; }
+    .skill-card:hover .tag { background:var(--gold-pale);color:#7a5e1a; }
+    #projects-strip { background:var(--navy); }
+    .projects-grid { display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.6rem;margin-bottom:3rem; }
+    .project-card { overflow:hidden; }
+    .project-thumb { height:170px;background:var(--navy-light);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden; }
+    .project-thumb-num { font-family:'Playfair Display',serif;font-size:4rem;font-weight:900;color:rgba(201,168,76,0.15); }
+    .project-thumb-bar { position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),transparent); }
+    .project-body { padding:1.8rem; }
+    .project-type { font-size:0.7rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem; }
+    .project-title { font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:var(--white);margin-bottom:0.8rem;line-height:1.3; }
+    .project-desc { font-size:0.88rem;line-height:1.75;color:rgba(255,255,255,0.45);margin-bottom:1.4rem; }
+    .project-stack { display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:1.4rem; }
+    .project-links { display:flex;gap:1.2rem; }
+    .project-link { font-size:0.8rem;font-weight:600;color:rgba(255,255,255,0.4);display:flex;align-items:center;gap:5px;transition:color 0.2s;letter-spacing:0.5px; }
+    .project-link:hover { color:var(--gold-light); }
+    .project-link svg { width:13px;height:13px; }
+    .projects-cta { text-align:center; }
+    #testimonials { background:var(--cream-dark); }
+    .testimonials-grid { display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem; }
+    .testimonial-card { padding:2rem; }
+    .testimonial-quote { font-size:2rem;color:var(--gold);font-family:'Playfair Display',serif;margin-bottom:1rem;line-height:1; }
+    .testimonial-text { font-size:0.95rem;line-height:1.8;color:var(--text-muted);font-style:italic;margin-bottom:1.5rem; }
+    .testimonial-author { display:flex;align-items:center;gap:12px; }
+    .author-avatar { width:42px;height:42px;background:var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--gold); }
+    .author-name { font-weight:700;font-size:0.88rem;color:var(--navy); }
+    .author-role { font-size:0.78rem;color:var(--text-muted); }
+    #cta-band { background:var(--navy);padding:80px 5%;text-align:center;position:relative;overflow:hidden; }
+    #cta-band::before { content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:300px;background:radial-gradient(ellipse,rgba(201,168,76,0.08) 0%,transparent 70%);pointer-events:none; }
+    #cta-band h2 { font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);font-weight:900;color:var(--white);margin-bottom:1rem;position:relative; }
+    #cta-band h2 span { color:var(--gold); }
+    #cta-band p { color:rgba(255,255,255,0.5);font-size:1.05rem;margin-bottom:2.5rem;position:relative; }
+    #cta-band .actions { display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;position:relative; }
+    @media(max-width:900px){ .about-grid{grid-template-columns:1fr;gap:3rem;} .hero-stack-card{display:none;} }
+  </style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">MM.</a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="skills.html">Skills</a></li>
+    <li><a href="contact.html" class="nav-cta">Hire Me</a></li>
+  </ul>
+  <div class="hamburger"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-menu">
+  <a href="index.html">Home</a><a href="about.html">About</a>
+  <a href="projects.html">Projects</a><a href="skills.html">Skills</a>
+  <a href="contact.html">Contact / Hire Me</a>
+</div>
+<div class="page-wrap">
+  <section id="hero">
+    <div class="hero-bg-grid"></div><div class="hero-bg-glow"></div>
+    <div class="hero-content">
+      <div class="hero-badge fade-up"><span class="dot"></span>Available for new opportunities</div>
+      <h1 class="hero-name fade-up-1">Michael<br/><span>Madu.</span></h1>
+      <p class="hero-role fade-up-2">.NET Full Stack Developer &nbsp;&middot;&nbsp; <strong>Angular &amp; C# Specialist</strong></p>
+      <p class="hero-desc fade-up-3">I design and build scalable, enterprise-grade web applications — clean APIs on the backend, polished Angular interfaces on the front.</p>
+      <div class="hero-actions fade-up-4">
+        <a href="projects.html" class="btn-primary">View My Work</a>
+        <a href="contact.html" class="btn-outline">Get In Touch</a>
+      </div>
+    </div>
+    <div class="hero-stack-card fade-up-4">
+      <div class="sc-label">Core Stack</div>
+      <div class="hero-stack-item"><span class="sc-dot"></span><span class="sc-name">C# / .NET</span><span class="sc-sub">Backend</span></div>
+      <div class="hero-stack-item"><span class="sc-dot"></span><span class="sc-name">Angular</span><span class="sc-sub">Frontend</span></div>
+      <div class="hero-stack-item"><span class="sc-dot"></span><span class="sc-name">SQL Server</span><span class="sc-sub">Data</span></div>
+      <div class="hero-stack-item"><span class="sc-dot"></span><span class="sc-name">Azure</span><span class="sc-sub">Cloud</span></div>
+      <div class="hero-stack-item"><span class="sc-dot"></span><span class="sc-name">REST APIs</span><span class="sc-sub">Integration</span></div>
+    </div>
+    <div class="scroll-hint"><span>Scroll</span><div class="scroll-arrow"></div></div>
+  </section>
+  <section id="about-strip">
+    <div class="about-grid">
+      <div style="position:relative;">
+        <div class="about-img scroll-reveal">
+          <div class="about-img-initials"><img src="./{css,js,pages}/images/portfolio-dp1.jpeg" alt="" srcset=""></div>
+          <div class="about-img-label">Available to hire</div>
+        </div>
+        <div class="about-corner"></div><div class="about-corner2"></div>
+      </div>
+      <div class="about-text scroll-reveal">
+        <p class="section-label">About Me</p>
+        <h2 class="section-title">Building software that actually works</h2>
+        <div class="gold-divider"></div>
+        <p>I'm a <strong>.NET Full Stack Developer</strong> with 5 years of experience delivering web applications across enterprise and commercial environments. My work spans backend API design, SQL database architecture, and responsive Angular frontends.</p>
+        <p><!-- TODO: Replace with your real story --> I've worked in collaborative, cross-functional teams on products used by real users at scale — owning features end-to-end, from database schema to the Angular component that surfaces it.</p>
+        <div class="about-pills">
+          <span class="tag">C# / .NET</span><span class="tag">Angular</span><span class="tag">SQL Server</span>
+          <span class="tag">AWS</span><span class="tag">Clean Architecture</span><span class="tag">REST APIs</span>
+        </div>
+        <div class="about-actions">
+          <a href="about.html" class="btn-outline dark">Read More</a>
+          <a href="contact.html" class="btn-primary">Hire Me</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="skills-strip">
+    <div class="section-header scroll-reveal">
+      <p class="section-label">Technical Expertise</p>
+      <h2 class="section-title">My Stack</h2>
+      <div class="gold-divider"></div>
+      <p class="section-subtitle">The technologies I use to build and ship production-ready applications.</p>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card card scroll-reveal"><div class="skill-icon">⚙️</div><h3>Backend</h3><div class="tag-group"><span class="tag">C#</span><span class="tag">.NET 6/8</span><span class="tag">ASP.NET Core</span><span class="tag">Web API</span></div></div>
+      <div class="skill-card card scroll-reveal"><div class="skill-icon">🎨</div><h3>Frontend</h3><div class="tag-group"><span class="tag">Angular 14+</span><span class="tag">TypeScript</span><span class="tag">RxJS</span><span class="tag">NgRx</span><span class="tag">Angular Material</span></div></div>
+      <div class="skill-card card scroll-reveal"><div class="skill-icon">🗄️</div><h3>Data</h3><div class="tag-group"><span class="tag">SQL Server</span><span class="tag">EF Core</span><span class="tag">Dapper</span><span class="tag">LINQ</span><span class="tag">Redis</span></div></div>
+      <div class="skill-card card scroll-reveal"><div class="skill-icon">☁️</div><h3>Cloud &amp; DevOps</h3><div class="tag-group"><span class="tag">AWS</span><span class="tag">Docker</span><span class="tag">CI/CD</span><span class="tag">GitHub Actions</span></div></div>
+    </div>
+    <div style="text-align:center;margin-top:2.5rem;" class="scroll-reveal"><a href="skills.html" class="btn-outline dark">View Full Skills</a></div>
+  </section>
+  <section id="projects-strip">
+    <div class="section-header scroll-reveal">
+      <p class="section-label">Case Studies</p>
+      <h2 class="section-title light">Selected Projects</h2>
+      <div class="gold-divider"></div>
+      <p class="section-subtitle light">A selection of projects I've contributed to or built — each a real delivery with a real outcome.</p>
+    </div>
+    <div class="projects-grid">
+      <div class="project-card card-dark scroll-reveal">
+        <div class="project-thumb"><div class="project-thumb-num">01</div><div class="project-thumb-bar"></div></div>
+        <div class="project-body">
+          <p class="project-type">Enterprise Web App</p>
+          <h3 class="project-title">Project Title Here</h3><!-- TODO -->
+          <p class="project-desc">Brief description of what this project does, who uses it, and the problem it solves.</p><!-- TODO -->
+          <div class="project-stack"><span class="tag-gold light">.NET 6</span><span class="tag-gold light">Angular</span><span class="tag-gold light">SQL Server</span><span class="tag-gold light">Azure</span></div>
+          <div class="project-links"><a href="pages/project-detail.html?id=1" class="project-link"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>Case Study</a></div>
+        </div>
+      </div>
+      <div class="project-card card-dark scroll-reveal">
+        <div class="project-thumb" style="background:#1a2e4a;"><div class="project-thumb-num">02</div><div class="project-thumb-bar"></div></div>
+        <div class="project-body">
+          <p class="project-type">Internal Dashboard</p>
+          <h3 class="project-title">Project Title Here</h3><!-- TODO -->
+          <p class="project-desc">Brief description of the dashboard, who used it, and what decisions it powered.</p><!-- TODO -->
+          <div class="project-stack"><span class="tag-gold light">ASP.NET Core</span><span class="tag-gold light">Angular</span><span class="tag-gold light">SignalR</span><span class="tag-gold light">EF Core</span></div>
+          <div class="project-links"><a href="pages/project-detail.html?id=2" class="project-link"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>Case Study</a></div>
+        </div>
+      </div>
+      <div class="project-card card-dark scroll-reveal">
+        <div class="project-thumb" style="background:#0f2035;"><div class="project-thumb-num">03</div><div class="project-thumb-bar"></div></div>
+        <div class="project-body">
+          <p class="project-type">API / Integration</p>
+          <h3 class="project-title">Project Title Here</h3><!-- TODO -->
+          <p class="project-desc">Describe the integration, systems involved, and the impact on the product workflow.</p><!-- TODO -->
+          <div class="project-stack"><span class="tag-gold light">C#</span><span class="tag-gold light">REST API</span><span class="tag-gold light">JWT</span><span class="tag-gold light">Docker</span></div>
+          <div class="project-links"><a href="pages/project-detail.html?id=3" class="project-link"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>Case Study</a></div>
+        </div>
+      </div>
+    </div>
+    <div class="projects-cta scroll-reveal"><a href="projects.html" class="btn-primary">View All Projects</a></div>
+  </section>
+  <section id="testimonials">
+    <div class="section-header scroll-reveal">
+      <p class="section-label">Social Proof</p>
+      <h2 class="section-title">What People Say</h2>
+      <div class="gold-divider"></div>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card card scroll-reveal">
+        <div class="testimonial-quote">"</div>
+        <p class="testimonial-text"><!-- TODO: Real testimonial --> John consistently delivered clean, well-structured code on time. His understanding of both the backend and Angular frontend meant we rarely had integration issues.</p>
+        <div class="testimonial-author"><div class="author-avatar">AM</div><div><div class="author-name">A. Manager</div><div class="author-role">Tech Lead, [Company]</div></div></div><!-- TODO -->
+      </div>
+      <div class="testimonial-card card scroll-reveal">
+        <div class="testimonial-quote">"</div>
+        <p class="testimonial-text"><!-- TODO: Real testimonial --> Solid technical skills, great communication. He took ownership of the API layer and the result was a stable, performant service that's been running without issues.</p>
+        <div class="testimonial-author"><div class="author-avatar">TC</div><div><div class="author-name">T. Colleague</div><div class="author-role">Senior Developer, [Company]</div></div></div><!-- TODO -->
+      </div>
+      <div class="testimonial-card card scroll-reveal">
+        <div class="testimonial-quote">"</div>
+        <p class="testimonial-text"><!-- TODO: Real testimonial --> He has a rare combination of backend depth and frontend polish. Would absolutely work with him again on a production project.</p>
+        <div class="testimonial-author"><div class="author-avatar">PD</div><div><div class="author-name">P. Director</div><div class="author-role">Product Manager, [Company]</div></div></div><!-- TODO -->
+      </div>
+    </div>
+  </section>
+  <section id="cta-band">
+    <h2>Ready to build <span>something great?</span></h2>
+    <p>I'm currently open to full-time roles, contracts, and interesting collaborations.</p>
+    <div class="actions"><a href="contact.html" class="btn-primary">Get In Touch</a><a href="projects.html" class="btn-outline">See My Work First</a></div>
+  </section>
+  <footer>
+    <div class="footer-logo">JD.</div>
+    <p class="footer-copy">© 2026 John Doe. All rights reserved.</p>
+    <div class="footer-links"><a href="about.html">About</a><a href="projects.html">Projects</a><a href="skills.html">Skills</a><a href="contact.html">Contact</a></div>
+  </footer>
+</div>
+<script src="js/main.js"></script>
+</body>
+</html>

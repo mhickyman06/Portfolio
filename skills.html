@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Skills — John Doe</title>
+  <link rel="stylesheet" href="css/global.css"/>
+  <style>
+    #skills-main { background: var(--white); }
+    /* ── SKILL GROUPS ── */
+    .skill-group { margin-bottom: 4rem; }
+    .skill-group-header {
+      display: flex; align-items: center; gap: 1rem;
+      margin-bottom: 2rem; padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .skill-group-icon {
+      width: 52px; height: 52px;
+      background: var(--navy); border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; flex-shrink: 0;
+    }
+    .skill-group-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem; font-weight: 800; color: var(--navy);
+    }
+    .skill-group-header p {
+      font-size: 0.88rem; color: var(--text-muted); margin-top: 2px;
+    }
+    /* ── SKILL BARS ── */
+    .skill-bars { display: flex; flex-direction: column; gap: 1.2rem; }
+    .skill-bar-item {}
+    .skill-bar-header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 6px;
+    }
+    .skill-bar-name { font-size: 0.92rem; font-weight: 600; color: var(--navy); }
+    .skill-bar-level { font-size: 0.78rem; font-weight: 600; color: var(--gold); }
+    .skill-bar-track {
+      height: 6px; background: var(--cream-dark); border-radius: 3px; overflow: hidden;
+    }
+    .skill-bar-fill {
+      height: 100%; background: linear-gradient(90deg, var(--navy), var(--navy-light));
+      border-radius: 3px; width: 0; transition: width 1.2s cubic-bezier(0.4,0,0.2,1);
+    }
+    .skill-bar-fill.animated { width: var(--pct); }
+    /* ── TECH GRID ── */
+    .tech-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 0.8rem;
+    }
+    .tech-item {
+      background: var(--cream); border: 1px solid var(--border-light);
+      border-radius: var(--radius); padding: 1rem;
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      text-align: center; cursor: default;
+      transition: all var(--transition);
+    }
+    .tech-item:hover {
+      background: var(--navy); border-color: var(--navy);
+      transform: translateY(-3px); box-shadow: var(--shadow);
+    }
+    .tech-item:hover .tech-name { color: var(--white); }
+    .tech-item:hover .tech-label { color: rgba(255,255,255,0.45); }
+    .tech-emoji { font-size: 1.6rem; line-height: 1; }
+    .tech-name { font-size: 0.85rem; font-weight: 600; color: var(--navy); }
+    .tech-label { font-size: 0.7rem; color: var(--text-muted); }
+
+    /* ── TOOLS SECTION ── */
+    #tools-section { background: var(--cream); }
+    .tools-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap: 1rem;
+    }
+    .tool-card {
+      background: var(--white); border: 1px solid var(--border-light);
+      border-radius: var(--radius); padding: 1.2rem 1.4rem;
+      display: flex; align-items: center; gap: 12px;
+      transition: all var(--transition);
+    }
+    .tool-card:hover {
+      border-color: var(--border); box-shadow: var(--shadow);
+      transform: translateY(-2px);
+    }
+    .tool-icon { font-size: 1.3rem; flex-shrink: 0; }
+    .tool-name { font-size: 0.9rem; font-weight: 600; color: var(--navy); }
+    .tool-use { font-size: 0.75rem; color: var(--text-muted); }
+
+    /* ── LEARNING SECTION ── */
+    #learning { background: var(--navy); }
+    .learning-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .learning-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.8rem;
+      transition: background var(--transition), transform var(--transition);
+    }
+    .learning-card:hover {
+      background: rgba(201,168,76,0.07);
+      transform: translateY(-3px);
+    }
+    .learning-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--white); margin-bottom: 0.5rem;
+    }
+    .learning-card p { font-size: 0.88rem; line-height: 1.7; color: rgba(255,255,255,0.45); }
+
+    @media(max-width:700px){
+      .learning-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="index.html" class="nav-logo">JD.</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="skills.html">Skills</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Hire Me</a>
+  <button class="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-bg"><div class="page-hero-grid"></div></div>
+  <div class="page-hero-content">
+    <div class="page-hero-breadcrumb"><a href="index.html">Home</a><span>/</span><span>Skills</span></div>
+    <h1>Skills &amp; <span>Tech Stack</span></h1>
+    <p>A full breakdown of the tools, frameworks, and patterns I work with every day.</p>
+  </div>
+</div>
+
+<section id="skills-main" class="section">
+
+  <!-- BACKEND -->
+  <div class="skill-group aos">
+    <div class="skill-group-header">
+      <div class="skill-group-icon">⚙️</div>
+      <div><h2>Backend Development</h2><p>C#, .NET ecosystem, APIs, and server-side architecture</p></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;">
+      <div class="skill-bars">
+        <!-- TODO: Adjust percentages to honestly reflect your skill level -->
+        <div class="skill-bar-item"><div class="skill-bar-header"><span class="skill-bar-name">C# / .NET</span><span class="skill-bar-level">Advanced</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--pct:90%;"></div></div></div>
+        <div class="skill-bar-item"><div class="skill-bar-header"><span class="skill-bar-name">ASP.NET Core Web API</span><span class="skill-bar-level">Advanced</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--pct:88%;"></div></div></div>
+        <div class="skill-bar-item"><div class="skill-bar-header"><span class="skill-bar-name">Entity Framework Core</span><span class="skill-bar-level">Advanced</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--pct:85%;"></div></div></div>
+        <div class="skill-bar-item"><div class="skill-bar-header"><span class="skill-bar-name">Clean Architecture / CQRS</span><span class="skill-bar-level">Proficient</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--pct:80%;"></div></div></div>
+        <div class="skill-bar-item"><div class="skill-bar-header"><span class="skill-bar-name">SignalR</span><span class="skill-bar-level">Proficient</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--pct:72%;"></div></div></div>
+      </div>
+      <div class="tech-grid">
+        <div class="tech-item"><span class="tech-emoji">⚡</span><span class="tech-name">C#</span><span class="tech-label">Primary Language</span></div>
+        <div class="tech-item"><span class="tech-emoji">🔷</span><span class="tech-name">.NET 6/8</span><span class="tech-label">Runtime</span></div>
+        <div class="tech-item"><span class="tech-emoji">🌐</span><span class="tech-name">Web API</span><span class="tech-label">REST</span></div>
+        <div class="tech-item"><span class="tech-emoji">📡</span><span class="tech-name">SignalR</span><span class="tech-label">Real-time</span></div>
+        <div class="tech-item"><span class="tech-emoji">🔀</span><span class="tech-name">MediatR</span><span class="tech-label">CQRS</span></div>
+        <div class="tech-item"><span class="tech-emoji">🗺️</span><span class="tech-name">AutoMapper</span><span class="tech-label">Mapping</span></div>
+        <div class="tech-item"><span class="tech-emoji">✅</span><span class="tech-name">FluentVal.</span><span class="tech-label">Validation</span></div>
+        <div class="tech-item"><span class="tech-emoji">🧪</span><span class="tech-name">xUnit</span><span class="tech-label">Testing</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FRONTEND -->
+  <div class="skill-group aos">
+    <div class="skill-group-header">
+      <div class="skill-group-icon">🎨</div>
+      <div><h2>Frontend Development</h2><p>Angular, TypeScript, and responsive UI development</p></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;">
+      <div class="skill-bars">
+        <div class="skill-bar-item"><div class="skill-bar-header"><span class="skill-bar-name">Angular (14+)</span><span class="skill-bar-level">Advanced</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--pct:87%;"></div></div></div>
+        <div class="skill-bar-item"><div class="skill-bar-header"><span class="skill-bar-name">TypeScript</span><span class="skill-bar-level">Advanced</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--pct:85%;"></div></div></div>
+        <div class="skill-bar-item"><div class="skill-bar-header"><span class="skill-bar-name">RxJS</span><span class="skill-bar-level">Proficient</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--pct:78%;"></div></div></div>
+        <div class="skill-bar-item"><div class="skill-bar-header"><span class="skill-bar-name">NgRx (State Management)</span><span class="skill-bar-level">Proficient</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--pct:72%;"></div></div></div>
+        <div class="skill-bar-item"><div class="skill-bar-header"><span class="skill-bar-name">HTML5 / SCSS</span><span class="skill-bar-level">Advanced</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--pct:88%;"></div></div></div>
+      </div>
+      <div class="tech-grid">
+        <div class="tech-item"><span class="tech-emoji">🅰️</span><span class="tech-name">Angular</span><span class="tech-label">Framework</span></div>
+        <div class="tech-item"><span class="tech-emoji">🔷</span><span class="tech-name">TypeScript</span><span class="tech-label">Language</span></div>
+        <div class="tech-item"><span class="tech-emoji">🔄</span><span class="tech-name">RxJS</span><span class="tech-label">Reactive</span></div>
+        <div class="tech-item"><span class="tech-emoji">🗂️</span><span class="tech-name">NgRx</span><span class="tech-label">State Mgmt</span></div>
+        <div class="tech-item"><span class="tech-emoji">🎨</span><span class="tech-name">Ang. Material</span><span class="tech-label">UI Library</span></div>
+        <div class="tech-item"><span class="tech-emoji">💄</span><span class="tech-name">SCSS</span><span class="tech-label">Styling</span></div>
+        <div class="tech-item"><span class="tech-emoji">📋</span><span class="tech-name">Reactive Forms</span><span class="tech-label">Forms</span></div>
+        <div class="tech-item"><span class="tech-emoji">🔒</span><span class="tech-name">Guards / Resolvers</span><span class="tech-label">Routing</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DATA -->
+  <div class="skill-group aos">
+    <div class="skill-group-header">
+      <div class="skill-group-icon">🗄️</div>
+      <div><h2>Data &amp; Persistence</h2><p>Databases, ORMs, and data access patterns</p></div>
+    </div>
+    <div class="skill-bars">
+      <div class="skill-bar-item"><div class="skill-bar-header"><span class="skill-bar-name">SQL Server</span><span class="skill-bar-level">Advanced</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--pct:88%;"></div></div></div>
+      <div class="skill-bar-item"><div class="skill-bar-header"><span class="skill-bar-name">Entity Framework Core</span><span class="skill-bar-level">Advanced</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--pct:85%;"></div></div></div>
+      <div class="skill-bar-item"><div class="skill-bar-header"><span class="skill-bar-name">Dapper</span><span class="skill-bar-level">Proficient</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--pct:75%;"></div></div></div>
+      <div class="skill-bar-item"><div class="skill-bar-header"><span class="skill-bar-name">Redis (Caching)</span><span class="skill-bar-level">Familiar</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--pct:60%;"></div></div></div>
+    </div>
+  </div>
+
+  <!-- CLOUD & AUTH -->
+  <div class="skill-group aos">
+    <div class="skill-group-header">
+      <div class="skill-group-icon">☁️</div>
+      <div><h2>Cloud, DevOps &amp; Auth</h2><p>Azure, deployment, security, and CI/CD</p></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;">
+      <div class="skill-bars">
+        <div class="skill-bar-item"><div class="skill-bar-header"><span class="skill-bar-name">Azure (App Services, etc.)</span><span class="skill-bar-level">Proficient</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--pct:75%;"></div></div></div>
+        <div class="skill-bar-item"><div class="skill-bar-header"><span class="skill-bar-name">Azure DevOps / CI-CD</span><span class="skill-bar-level">Proficient</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--pct:72%;"></div></div></div>
+        <div class="skill-bar-item"><div class="skill-bar-header"><span class="skill-bar-name">Docker</span><span class="skill-bar-level">Familiar</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--pct:60%;"></div></div></div>
+        <div class="skill-bar-item"><div class="skill-bar-header"><span class="skill-bar-name">JWT / OAuth 2.0</span><span class="skill-bar-level">Advanced</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="--pct:85%;"></div></div></div>
+      </div>
+      <div class="tech-grid">
+        <div class="tech-item"><span class="tech-emoji">☁️</span><span class="tech-name">Azure</span><span class="tech-label">Cloud</span></div>
+        <div class="tech-item"><span class="tech-emoji">🐳</span><span class="tech-name">Docker</span><span class="tech-label">Containers</span></div>
+        <div class="tech-item"><span class="tech-emoji">🔁</span><span class="tech-name">CI/CD</span><span class="tech-label">Pipelines</span></div>
+        <div class="tech-item"><span class="tech-emoji">🔑</span><span class="tech-name">JWT</span><span class="tech-label">Auth</span></div>
+        <div class="tech-item"><span class="tech-emoji">🔐</span><span class="tech-name">OAuth 2.0</span><span class="tech-label">Auth</span></div>
+        <div class="tech-item"><span class="tech-emoji">🛡️</span><span class="tech-name">ASP.NET Identity</span><span class="tech-label">Auth</span></div>
+        <div class="tech-item"><span class="tech-emoji">🌍</span><span class="tech-name">IIS</span><span class="tech-label">Hosting</span></div>
+        <div class="tech-item"><span class="tech-emoji">🔀</span><span class="tech-name">Git</span><span class="tech-label">Version Control</span></div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- TOOLS -->
+<section id="tools-section" class="section">
+  <div class="section-header aos">
+    <p class="section-label">Day-to-Day Toolkit</p>
+    <h2 class="section-title">Tools I Use</h2>
+    <div class="gold-divider"></div>
+  </div>
+  <div class="tools-grid">
+    <div class="tool-card aos"><span class="tool-icon">💻</span><div><div class="tool-name">Visual Studio</div><div class="tool-use">Primary IDE</div></div></div>
+    <div class="tool-card aos aos-delay-1"><span class="tool-icon">📝</span><div><div class="tool-name">VS Code</div><div class="tool-use">Frontend & scripting</div></div></div>
+    <div class="tool-card aos aos-delay-2"><span class="tool-icon">🗃️</span><div><div class="tool-name">SSMS</div><div class="tool-use">SQL Server Management</div></div></div>
+    <div class="tool-card aos"><span class="tool-icon">📡</span><div><div class="tool-name">Postman</div><div class="tool-use">API testing</div></div></div>
+    <div class="tool-card aos aos-delay-1"><span class="tool-icon">🐙</span><div><div class="tool-name">GitHub / Azure Repos</div><div class="tool-use">Source control</div></div></div>
+    <div class="tool-card aos aos-delay-2"><span class="tool-icon">🏃</span><div><div class="tool-name">Azure DevOps</div><div class="tool-use">Pipelines & boards</div></div></div>
+    <div class="tool-card aos"><span class="tool-icon">🐳</span><div><div class="tool-name">Docker Desktop</div><div class="tool-use">Containerisation</div></div></div>
+    <div class="tool-card aos aos-delay-1"><span class="tool-icon">📋</span><div><div class="tool-name">Jira</div><div class="tool-use">Project management</div></div></div>
+    <div class="tool-card aos aos-delay-2"><span class="tool-icon">🎨</span><div><div class="tool-name">Figma</div><div class="tool-use">UI reference / wireframes</div></div></div>
+  </div>
+</section>
+
+<!-- CURRENTLY LEARNING -->
+<section id="learning" class="section">
+  <div class="section-header aos">
+    <p class="section-label">Always Growing</p>
+    <h2 class="section-title light">Currently Learning</h2>
+    <div class="gold-divider"></div>
+    <p class="section-subtitle light">The things I'm actively exploring and investing time in right now.</p>
+  </div>
+  <div class="learning-grid">
+    <!-- TODO: Replace with what you're actually learning -->
+    <div class="learning-card aos"><h3>☁️ Azure Cloud (AZ-204)</h3><p>Deepening my Azure knowledge — Blob Storage, Service Bus, Azure Functions, and App Service deployment patterns.</p></div>
+    <div class="learning-card aos aos-delay-1"><h3>🧩 Microservices Architecture</h3><p>Exploring how to decompose monolithic .NET apps into microservices — service discovery, messaging, and distributed data.</p></div>
+    <div class="learning-card aos aos-delay-2"><h3>🅰️ Angular 17 Signals</h3><p>Keeping up with the new Angular reactivity model and standalone components — the future of Angular development.</p></div>
+    <div class="learning-card aos aos-delay-3"><h3>🧪 Test-Driven Development</h3><p>Improving discipline around writing tests first — unit tests with xUnit and Moq, integration tests with WebApplicationFactory.</p></div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-main">
+    <div class="footer-brand"><div class="footer-logo">JD.</div><p>.NET Full Stack Developer. Angular &amp; C# Specialist. Lagos, Nigeria.</p></div>
+    <div class="footer-col"><h4>Navigation</h4><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="projects.html">Projects</a></li><li><a href="skills.html">Skills</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    <div class="footer-col"><h4>Projects</h4><ul><li><a href="project-detail.html">Project One</a></li><li><a href="project-detail.html">Project Two</a></li><li><a href="project-detail.html">Project Three</a></li></ul></div>
+    <div class="footer-col"><h4>Connect</h4><ul><li><a href="#">LinkedIn</a></li><li><a href="#">GitHub</a></li><li><a href="contact.html">Email Me</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 John Doe. All rights reserved.</p>
+    <div class="footer-socials"><a href="#" title="LinkedIn">in</a><a href="#" title="GitHub">gh</a><a href="contact.html" title="Email">✉</a></div>
+  </div>
+</footer>
+<script src="js/main.js"></script>
+<script>
+  // Animate skill bars when they enter view
+  const barObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.skill-bar-fill').forEach(bar => bar.classList.add('animated'));
+      }
+    });
+  }, { threshold: 0.2 });
+  document.querySelectorAll('.skill-group').forEach(g => barObserver.observe(g));
+</script>
+</body>
+</html>

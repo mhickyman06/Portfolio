@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact — John Doe</title>
+  <link rel="stylesheet" href="css/global.css"/>
+  <style>
+    #contact-section { background: var(--white); }
+    .contact-layout {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; align-items: start;
+    }
+    /* INFO SIDE */
+    .contact-info h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem; font-weight: 800; color: var(--navy);
+      margin-bottom: 0.8rem;
+    }
+    .contact-info > p {
+      font-size: 1rem; line-height: 1.8; color: var(--text-muted); margin-bottom: 2.5rem;
+    }
+    .contact-cards { display: flex; flex-direction: column; gap: 1rem; }
+    .contact-card {
+      display: flex; align-items: center; gap: 16px;
+      background: var(--cream); border: 1px solid var(--border-light);
+      border-radius: var(--radius); padding: 1.2rem 1.4rem;
+      text-decoration: none; color: inherit;
+      transition: all var(--transition);
+    }
+    .contact-card:hover {
+      border-color: var(--border); box-shadow: var(--shadow);
+      transform: translateX(4px);
+    }
+    .contact-card-icon {
+      width: 46px; height: 46px; flex-shrink: 0;
+      background: var(--navy); border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+    }
+    .contact-card-label {
+      font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1.2px; color: var(--text-muted); display: block; margin-bottom: 2px;
+    }
+    .contact-card-val {
+      font-size: 0.92rem; font-weight: 600; color: var(--navy);
+    }
+    .contact-card:hover .contact-card-val { color: var(--gold); }
+    .availability-box {
+      margin-top: 2rem; background: rgba(201,168,76,0.08);
+      border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 1.4rem 1.6rem;
+    }
+    .availability-box h4 {
+      font-size: 0.85rem; font-weight: 700; color: var(--navy);
+      margin-bottom: 0.8rem; display: flex; align-items: center; gap: 8px;
+    }
+    .availability-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #22c55e; display: inline-block;
+      animation: pulse 2s infinite;
+    }
+    .availability-box ul { display: flex; flex-direction: column; gap: 0.5rem; }
+    .availability-box li {
+      font-size: 0.88rem; color: var(--text-muted);
+      padding-left: 1.2rem; position: relative;
+    }
+    .availability-box li::before {
+      content: '✓'; position: absolute; left: 0;
+      color: var(--gold); font-weight: 700; font-size: 0.8rem;
+    }
+
+    /* FORM SIDE -->*/
+    .contact-form { display: flex; flex-direction: column; gap: 1.3rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.3rem; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group label {
+      font-size: 0.78rem; font-weight: 700;
+      color: var(--navy); letter-spacing: 0.8px; text-transform: uppercase;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: var(--cream); border: 1.5px solid var(--border-light);
+      border-radius: 6px; padding: 12px 16px;
+      font-family: 'DM Sans', sans-serif; font-size: 0.95rem;
+      color: var(--text-main); transition: border-color var(--transition), box-shadow var(--transition);
+      outline: none; appearance: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.1);
+      background: var(--white);
+    }
+    .form-group textarea { min-height: 150px; resize: vertical; }
+    .btn-submit {
+      background: var(--navy); color: var(--white);
+      border: 2px solid var(--navy);
+      padding: 14px 36px; border-radius: var(--radius-sm);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700; font-size: 0.9rem;
+      letter-spacing: 0.8px; text-transform: uppercase;
+      cursor: pointer; align-self: flex-start;
+      transition: all var(--transition);
+    }
+    .btn-submit:hover {
+      background: var(--navy-light); border-color: var(--navy-light);
+      transform: translateY(-2px); box-shadow: var(--shadow);
+    }
+    .form-note {
+      font-size: 0.8rem; color: var(--text-muted); margin-top: -0.5rem;
+    }
+
+    /* FAQ SECTION -->*/
+    #faq { background: var(--cream); }
+    .faq-list { display: flex; flex-direction: column; gap: 1rem; max-width: 700px; }
+    .faq-item {
+      background: var(--white); border: 1px solid var(--border-light);
+      border-radius: var(--radius); overflow: hidden;
+    }
+    .faq-q {
+      width: 100%; background: none; border: none;
+      padding: 1.2rem 1.4rem; text-align: left;
+      display: flex; justify-content: space-between; align-items: center;
+      cursor: pointer; font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem; font-weight: 600; color: var(--navy);
+    }
+    .faq-arrow { transition: transform var(--transition); font-size: 0.85rem; }
+    .faq-item.open .faq-arrow { transform: rotate(180deg); }
+    .faq-a {
+      max-height: 0; overflow: hidden; transition: max-height 0.35s ease;
+    }
+    .faq-item.open .faq-a { max-height: 200px; }
+    .faq-a p {
+      padding: 0 1.4rem 1.2rem; font-size: 0.92rem;
+      line-height: 1.8; color: var(--text-muted);
+    }
+
+    @media(max-width:800px){
+      .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="index.html" class="nav-logo">JD.</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="skills.html">Skills</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Hire Me</a>
+  <button class="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-bg"><div class="page-hero-grid"></div></div>
+  <div class="page-hero-content">
+    <div class="page-hero-breadcrumb"><a href="index.html">Home</a><span>/</span><span>Contact</span></div>
+    <h1>Get In <span>Touch</span></h1>
+    <p>Open to full-time roles, contract work, and interesting collaborations. Let's talk.</p>
+  </div>
+</div>
+
+<section id="contact-section" class="section">
+  <div class="contact-layout">
+
+    <!-- INFO -->
+    <div class="contact-info aos">
+      <h3>Let's build something together</h3>
+      <p>
+        Whether you're looking to hire a .NET developer, have a project in mind, 
+        or just want to connect — I'd love to hear from you. I typically respond within 24 hours.
+      </p>
+      <div class="contact-cards">
+        <!-- TODO: Replace # and placeholder text with your real details -->
+        <a href="mailto:john.doe@email.com" class="contact-card">
+          <div class="contact-card-icon">✉️</div>
+          <div><span class="contact-card-label">Email</span><span class="contact-card-val">john.doe@email.com</span></div>
+        </a>
+        <a href="https://linkedin.com/in/johndoe" class="contact-card" target="_blank">
+          <div class="contact-card-icon">🔗</div>
+          <div><span class="contact-card-label">LinkedIn</span><span class="contact-card-val">linkedin.com/in/johndoe</span></div>
+        </a>
+        <a href="https://github.com/johndoe" class="contact-card" target="_blank">
+          <div class="contact-card-icon">🐙</div>
+          <div><span class="contact-card-label">GitHub</span><span class="contact-card-val">github.com/johndoe</span></div>
+        </a>
+        <div class="contact-card" style="cursor:default;">
+          <div class="contact-card-icon">📍</div>
+          <div><span class="contact-card-label">Location</span><span class="contact-card-val">Lagos, Nigeria · Open to Remote</span></div>
+        </div>
+      </div>
+      <div class="availability-box">
+        <h4><span class="availability-dot"></span> Currently Available For</h4>
+        <ul>
+          <!-- TODO: Update to reflect what you're actually open to -->
+          <li>Full-time .NET developer roles (remote or hybrid)</li>
+          <li>Contract / freelance .NET + Angular projects</li>
+          <li>Technical consultations and code reviews</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- FORM -->
+    <div class="aos aos-delay-1">
+      <form class="contact-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name *</label>
+            <input type="text" placeholder="Jane" required/>
+          </div>
+          <div class="form-group">
+            <label>Last Name *</label>
+            <input type="text" placeholder="Smith" required/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email Address *</label>
+          <input type="email" placeholder="jane@company.com" required/>
+        </div>
+        <div class="form-group">
+          <label>Company / Organisation</label>
+          <input type="text" placeholder="Acme Corp (optional)"/>
+        </div>
+        <div class="form-group">
+          <label>Enquiry Type *</label>
+          <select required>
+            <option value="" disabled selected>Select enquiry type...</option>
+            <option>Full-time job opportunity</option>
+            <option>Contract / freelance project</option>
+            <option>Collaboration</option>
+            <option>General enquiry</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Message *</label>
+          <textarea placeholder="Tell me about the role, project, or what you have in mind..." required></textarea>
+        </div>
+        <p class="form-note">* Required fields. I'll get back to you within 24 hours.</p>
+        <button type="submit" class="btn-submit">Send Message →</button>
+      </form>
+    </div>
+
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="section">
+  <div class="section-header aos">
+    <p class="section-label">Common Questions</p>
+    <h2 class="section-title">FAQ</h2>
+    <div class="gold-divider"></div>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item aos">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Are you open to remote roles? <span class="faq-arrow">▼</span>
+      </button>
+      <div class="faq-a">
+        <!-- TODO: Update answers to your situation -->
+        <p>Yes — I'm fully comfortable with remote work and have experience collaborating in distributed teams. I'm open to fully remote roles globally, as well as hybrid roles in Lagos.</p>
+      </div>
+    </div>
+    <div class="faq-item aos">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        What engagement types are you open to? <span class="faq-arrow">▼</span>
+      </button>
+      <div class="faq-a">
+        <p>I'm open to full-time employment, long-term contracts, and freelance engagements. I'm particularly interested in roles where I can work across the full stack — .NET backend and Angular frontend.</p>
+      </div>
+    </div>
+    <div class="faq-item aos">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Can you share code samples or a GitHub profile? <span class="faq-arrow">▼</span>
+      </button>
+      <div class="faq-a">
+        <p>Most of my professional experience has been on private, employer-owned repositories. I'm happy to discuss architecture decisions, walk through my approach to specific problems, or complete a technical assessment. I also have personal projects I can share on request.</p>
+      </div>
+    </div>
+    <div class="faq-item aos">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        What notice period do you have? <span class="faq-arrow">▼</span>
+      </button>
+      <div class="faq-a">
+        <!-- TODO: Update with your real notice period -->
+        <p>I'm currently [available immediately / on X weeks' notice]. I'm happy to discuss timelines that work for both parties.</p>
+      </div>
+    </div>
+    <div class="faq-item aos">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Are you open to relocation? <span class="faq-arrow">▼</span>
+      </button>
+      <div class="faq-a">
+        <!-- TODO: Update to your actual preference -->
+        <p>I'm primarily targeting remote roles. I'm open to relocation for the right opportunity — please mention it in your message and we can discuss.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-main">
+    <div class="footer-brand"><div class="footer-logo">JD.</div><p>.NET Full Stack Developer. Angular &amp; C# Specialist. Lagos, Nigeria.</p></div>
+    <div class="footer-col"><h4>Navigation</h4><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="projects.html">Projects</a></li><li><a href="skills.html">Skills</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    <div class="footer-col"><h4>Projects</h4><ul><li><a href="project-detail.html">Project One</a></li><li><a href="project-detail.html">Project Two</a></li><li><a href="project-detail.html">Project Three</a></li></ul></div>
+    <div class="footer-col"><h4>Connect</h4><ul><li><a href="#">LinkedIn</a></li><li><a href="#">GitHub</a></li><li><a href="contact.html">Email Me</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 John Doe. All rights reserved.</p>
+    <div class="footer-socials"><a href="#" title="LinkedIn">in</a><a href="#" title="GitHub">gh</a><a href="contact.html" title="Email">✉</a></div>
+  </div>
+</footer>
+<script src="js/main.js"></script>
+<script>
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+</script>
+</body>
+</html>

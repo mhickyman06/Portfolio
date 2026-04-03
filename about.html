@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About — John Doe</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <style>
+    #about-main { background:var(--white); }
+    .about-layout { display:grid;grid-template-columns:340px 1fr;gap:5rem;align-items:start; }
+    .about-sidebar { position:sticky;top:100px; }
+    .profile-card { background:var(--navy);border-radius:var(--radius);overflow:hidden;margin-bottom:1.5rem; }
+    .profile-img { aspect-ratio:1;background:var(--navy-light);display:flex;align-items:center;justify-content:center; }
+    .profile-initials { font-family:'Playfair Display',serif;font-size:5rem;font-weight:900;color:rgba(201,168,76,0.35); }
+    .profile-info { padding:1.8rem; }
+    .profile-name { font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--white);margin-bottom:0.3rem; }
+    .profile-title { font-size:0.85rem;color:var(--gold-light);margin-bottom:1.2rem; }
+    .profile-meta { display:flex;flex-direction:column;gap:0.7rem; }
+    .meta-item { display:flex;align-items:center;gap:10px;font-size:0.83rem;color:rgba(255,255,255,0.5); }
+    .meta-item span:first-child { font-size:1rem; }
+    .sidebar-links { display:flex;flex-direction:column;gap:0.7rem; }
+    .sidebar-link { display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--white);border:1px solid var(--border-light);border-radius:6px;font-size:0.85rem;font-weight:600;color:var(--navy);transition:border-color 0.2s,color 0.2s,background 0.2s; }
+    .sidebar-link:hover { border-color:var(--gold);color:#7a5e1a;background:var(--gold-pale); }
+    .sidebar-link span:first-child { font-size:1rem; }
+    .about-main-content h2 { font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:800;color:var(--navy);margin:2rem 0 1rem; }
+    .about-main-content h2:first-of-type { margin-top:0; }
+    .about-main-content p { font-size:1rem;line-height:1.9;color:var(--text-muted);margin-bottom:1rem; }
+    .about-main-content p strong { color:var(--navy); }
+    .timeline { display:flex;flex-direction:column;gap:0;margin:1.5rem 0; }
+    .timeline-item { display:grid;grid-template-columns:140px 1fr;gap:2rem;padding:1.5rem 0;border-bottom:1px solid var(--border-light); }
+    .timeline-item:last-child { border-bottom:none; }
+    .timeline-year { font-size:0.78rem;font-weight:700;color:var(--gold);letter-spacing:1px;text-transform:uppercase;padding-top:3px; }
+    .timeline-content h4 { font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--navy);margin-bottom:0.2rem; }
+    .timeline-content .company { font-size:0.82rem;color:var(--text-muted);margin-bottom:0.6rem; }
+    .timeline-content p { font-size:0.9rem;line-height:1.7;color:var(--text-muted);margin:0; }
+    .values-grid { display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin:1.5rem 0; }
+    .value-item { padding:1.4rem;background:var(--cream);border-radius:var(--radius);border-left:3px solid var(--gold); }
+    .value-item h4 { font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:0.4rem; }
+    .value-item p { font-size:0.85rem;line-height:1.6;color:var(--text-muted);margin:0; }
+    @media(max-width:900px){ .about-layout{grid-template-columns:1fr;} .about-sidebar{position:static;} .values-grid{grid-template-columns:1fr;} .timeline-item{grid-template-columns:1fr;gap:0.3rem;} }
+  </style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">JD.</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="skills.html">Skills</a></li>
+    <li><a href="contact.html" class="nav-cta">Hire Me</a></li>
+  </ul>
+  <div class="hamburger"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-menu">
+  <a href="index.html">Home</a><a href="about.html">About</a>
+  <a href="projects.html">Projects</a><a href="skills.html">Skills</a>
+  <a href="contact.html">Contact / Hire Me</a>
+</div>
+<div class="page-wrap">
+  <div class="page-hero">
+    <div class="page-hero-grid"></div>
+    <div class="page-hero-content">
+      <div class="breadcrumb"><a href="index.html">Home</a><span>/</span><span>About</span></div>
+      <h1>About <span>Me</span></h1>
+      <p>I'm a .NET Full Stack Developer with 5 years of experience building scalable, enterprise-grade web applications. Here's my story.</p>
+    </div>
+  </div>
+  <section id="about-main">
+    <div class="about-layout">
+      <aside class="about-sidebar scroll-reveal">
+        <div class="profile-card">
+          <div class="profile-img"><div class="profile-initials">JD</div></div>
+          <div class="profile-info">
+            <div class="profile-name">John Doe</div><!-- TODO: Your name -->
+            <div class="profile-title">.NET Full Stack Developer</div>
+            <div class="profile-meta">
+              <div class="meta-item"><span>📍</span><span>Lagos, Nigeria</span></div><!-- TODO -->
+              <div class="meta-item"><span>💼</span><span>Open to opportunities</span></div>
+              <div class="meta-item"><span>🕐</span><span>5+ years experience</span></div>
+              <div class="meta-item"><span>🌍</span><span>Open to remote</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="sidebar-links">
+          <a href="mailto:john@example.com" class="sidebar-link"><span>✉️</span><span>john@example.com</span></a><!-- TODO -->
+          <a href="https://linkedin.com/in/johndoe" target="_blank" class="sidebar-link"><span>🔗</span><span>LinkedIn Profile</span></a><!-- TODO -->
+          <a href="https://github.com/johndoe" target="_blank" class="sidebar-link"><span>🐙</span><span>GitHub Profile</span></a><!-- TODO -->
+          <a href="#" class="sidebar-link"><span>📄</span><span>Download CV</span></a><!-- TODO: Link to your CV PDF -->
+        </div>
+      </aside>
+      <div class="about-main-content scroll-reveal">
+        <p class="section-label">My Story</p>
+        <h2>Who I Am</h2>
+        <!-- TODO: Replace all paragraphs below with your real story -->
+        <p>I'm a <strong>.NET Full Stack Developer</strong> based in Lagos, Nigeria, with 5 years of hands-on experience building web applications from the ground up. I specialise in <strong>C# / ASP.NET Core</strong> on the backend and <strong>Angular</strong> on the frontend — two ecosystems I've invested in deeply and continue to grow in.</p>
+        <p>My journey started with a passion for solving real problems through clean, maintainable code. Over the years I've had the opportunity to work on collaborative teams building products that real users depend on — from enterprise dashboards to API-driven platforms.</p>
+        <p><!-- TODO: Your origin story --> I got into software development because [your reason here]. What keeps me motivated is the combination of creative problem solving and technical precision that good software demands.</p>
+
+        <h2>Professional Experience</h2>
+        <div class="timeline">
+          <!-- TODO: Replace each timeline item with your real experience -->
+          <div class="timeline-item">
+            <div class="timeline-year">2022 – Present</div>
+            <div class="timeline-content">
+              <h4>Mid-level .NET Developer</h4>
+              <div class="company">[Company Name] · Lagos, Nigeria</div><!-- TODO -->
+              <p>Contributed to [describe project type]. Responsible for [your key responsibilities — API design, Angular features, DB optimisation, etc.]</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-year">2020 – 2022</div>
+            <div class="timeline-content">
+              <h4>Junior .NET Developer</h4>
+              <div class="company">[Company Name] · Lagos, Nigeria</div><!-- TODO -->
+              <p>Started building REST APIs with ASP.NET Core. Worked on Angular frontends and contributed to [describe type of product].</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-year">2019 – 2020</div>
+            <div class="timeline-content">
+              <h4>Intern / Graduate Developer</h4>
+              <div class="company">[Company Name]</div><!-- TODO -->
+              <p>Learned the fundamentals of professional software delivery — version control, code review, agile workflows, and writing maintainable C#.</p>
+            </div>
+          </div>
+        </div>
+
+        <h2>How I Work</h2>
+        <div class="values-grid">
+          <div class="value-item"><h4>Clean Code</h4><p>I write code as if the next person to read it is a colleague who values clarity. SOLID principles and clean architecture are defaults, not extras.</p></div>
+          <div class="value-item"><h4>End-to-End Ownership</h4><p>I'm comfortable owning a feature from the database schema to the Angular component — and the API contract in between.</p></div>
+          <div class="value-item"><h4>Collaboration First</h4><p>My best work has always come out of strong teams. I communicate early, review code constructively, and document what matters.</p></div>
+          <div class="value-item"><h4>Continuous Learning</h4><p>The .NET ecosystem evolves fast. I stay current with each LTS release, new Angular patterns, and cloud-native practices on Azure.</p></div>
+        </div>
+
+        <h2>Education</h2>
+        <div class="timeline">
+          <!-- TODO: Replace with your real education -->
+          <div class="timeline-item">
+            <div class="timeline-year">20XX – 20XX</div>
+            <div class="timeline-content">
+              <h4>B.Sc. Computer Science (or your degree)</h4>
+              <div class="company">[University Name]</div><!-- TODO -->
+              <p><!-- Optional: relevant modules, final year project, GPA if strong --></p>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:2.5rem;display:flex;gap:1rem;flex-wrap:wrap;">
+          <a href="projects.html" class="btn-primary">See My Projects</a>
+          <a href="contact.html" class="btn-outline dark">Get In Touch</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <div class="footer-logo">JD.</div>
+    <p class="footer-copy">© 2026 John Doe. All rights reserved.</p>
+    <div class="footer-links"><a href="about.html">About</a><a href="projects.html">Projects</a><a href="skills.html">Skills</a><a href="contact.html">Contact</a></div>
+  </footer>
+</div>
+<script src="js/main.js"></script>
+</body>
+</html>
